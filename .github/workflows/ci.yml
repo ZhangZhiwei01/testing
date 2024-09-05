@@ -1,0 +1,36 @@
+name: C++ CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up C++ environment
+      run: |
+        echo "Installing g++ compiler..."
+        sudo apt-get update
+        sudo apt-get install -y g++
+        echo "g++ installed successfully."
+
+    - name: Build C++ code
+      run: |
+        echo "Compiling C++ code..."
+        g++ -o main main.cpp
+        echo "Compilation completed."
+
+    - name: Run the executable
+      run: |
+        echo "Running the compiled executable..."
+        ./main
+        echo "Execution finished."
